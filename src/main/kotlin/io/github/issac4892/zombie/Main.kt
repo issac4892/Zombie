@@ -10,6 +10,8 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.Material
 import org.bukkit.event.entity.PlayerDeathEvent
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
 import org.bukkit.scoreboard.Scoreboard
 import org.bukkit.scoreboard.ScoreboardManager
 import org.bukkit.scoreboard.Team
@@ -49,11 +51,17 @@ class Main : JavaPlugin(), Listener {
         if (board.getEntryTeam(p.toString()).toString() == "ZOMBIE") {
             val item1 = ItemStack(Material.STONE_SWORD, 1)
             p.inventory.addItem(item1)
+            val potion = PotionEffect(PotionEffectType.SPEED, 99999999, 1, false, false)
+            p.addPotionEffect(potion)
             TODO("RandomTP")
         }
         if (board.getEntryTeam(p.toString()).toString() == "HUMAN") {
+            val potion = PotionEffect(PotionEffectType.SPEED, 99999999, 1, false, false)
+            p.addPotionEffect(potion)
+            p.health = 40.0
             TODO("Change health, 기본템 지급")
             //기본템: 갑옷, 검, 활, 황금사과, 대가리
+
         }
     }
 
