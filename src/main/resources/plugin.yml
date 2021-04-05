@@ -1,0 +1,4 @@
+name: Zombie
+version: 1.0-SNAPSHOT
+api-version: 1.13
+main: io.github.issac4892.zombie.Main
