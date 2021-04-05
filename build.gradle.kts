@@ -28,7 +28,10 @@ tasks {
             expand(project.properties)
         }
     }
-
+    shadowJar {
+        archiveClassifier.set("dist")
+        archiveVersion.set("")
+    }
     create<Copy>("dist") {
         from(shadowJar)
         into(".\\") // Directly into code root directory.

@@ -1,3 +1,5 @@
+@file:Suppress("UNREACHABLE_CODE")
+
 package io.github.issac4892.zombie
 
 import io.github.issac4892.zombie.commands.SetTeam
@@ -60,7 +62,7 @@ class Main : JavaPlugin(), Listener {
             p.addPotionEffect(potion)
             p.health = 40.0
             TODO("Change health, 기본템 지급")
-            //기본템: 갑옷, 검, 활, 황금사과, 대가리
+            //기본템: 갑옷, 검, 활, 황금사과
 
         }
     }
