@@ -17,6 +17,9 @@ import org.bukkit.potion.PotionEffectType
 import org.bukkit.scoreboard.Scoreboard
 import org.bukkit.scoreboard.ScoreboardManager
 import org.bukkit.scoreboard.Team
+import io.github.issac4892.zombie.listener.OnDeath
+import io.github.issac4892.zombie.listener.OnJoin
+
 
 
 class Main : JavaPlugin(), Listener {
@@ -25,6 +28,9 @@ class Main : JavaPlugin(), Listener {
         val manager: ScoreboardManager = Bukkit.getScoreboardManager()
         val board: Scoreboard = manager.newScoreboard
         Bukkit.getServer().pluginManager.registerEvents(this, this)
+        Bukkit.getServer().pluginManager.registerEvents(OnDeath(), this)
+        Bukkit.getServer().pluginManager.registerEvents(OnJoin(), this)
+
         val humanteam: Team = board.registerNewTeam("HUMAN")
         val zombieteam: Team = board.registerNewTeam("ZOMBIE")
         humanteam.prefix = "HUMAN"
@@ -41,39 +47,9 @@ class Main : JavaPlugin(), Listener {
         logger.info("Plugin Stopping!")
     }
 
-    @EventHandler
-    fun onPlayerJoin(e: PlayerJoinEvent) {
-        val p = e.player
-        val manager: ScoreboardManager = Bukkit.getScoreboardManager()
-        val board: Scoreboard = manager.newScoreboard
-        var humanteam: Team? = board.getTeam("HUMAN")
-        if (board.getEntryTeam(p.toString()) == null) {
-            board.getTeam("ZOMBIE")?.addEntry(p.toString())
-        }
-        if (board.getEntryTeam(p.toString()).toString() == "ZOMBIE") {
-            val item1 = ItemStack(Material.STONE_SWORD, 1)
-            p.inventory.addItem(item1)
-            val potion = PotionEffect(PotionEffectType.SPEED, 99999999, 1, false, false)
-            p.addPotionEffect(potion)
-            TODO("RandomTP")
-        }
-        if (board.getEntryTeam(p.toString()).toString() == "HUMAN") {
-            val potion = PotionEffect(PotionEffectType.SPEED, 99999999, 1, false, false)
-            p.addPotionEffect(potion)
-            p.health = 40.0
-            TODO("Change health, 기본템 지급")
-            //기본템: 갑옷, 검, 활, 황금사과
 
-        }
-    }
 
-    @EventHandler
-    fun onDeath(e: PlayerDeathEvent) {
-        TODO("HUMAN DEATH: HUMAN TO ZOMBIE, ANNOUNCE")
-        TODO("Check if there is left human")
-        TODO("Toast message?")
-        TODO("RandomTP")
-    }
+
 }
 
 // RandomTP -> Toast message where they teleported
